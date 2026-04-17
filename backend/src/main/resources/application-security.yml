@@ -1,0 +1,12 @@
+purchase:
+  security:
+    permit-all:
+      - /auth/**
+      - /v3/api-docs/**
+      - /swagger-ui/**
+      - /swagger-ui.html
+      - /webjars/**
+      - /doc.html
+      - /actuator/**
+      - /error
+      - /products/**

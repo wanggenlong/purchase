@@ -1,0 +1,68 @@
+# kdiff3 ignore
+*.orig
+
+# maven ignore
+target/
+
+# eclipse ignore
+.settings/
+.project
+.classpath
+classes/**
+
+# idea ignore
+.idea/
+*.ipr
+*.iml
+*.iws
+
+# temp ignore
+*.log
+*.cache
+*.diff
+*.patch
+*.tmp
+
+# system ignore
+.DS_Store
+Thumbs.db
+
+# package ignore (optional)
+# *.jar
+# *.war
+# *.zip
+# *.tar
+# *.tar.gz
+.omc
+# embedded tomcat
+tomcat.8080/**
+
+# pods ignore
+Pods/
+
+node_modules/
+
+# local coding guidelines
+.coding-guidelines.md
+.cr-issues.md
+.cr-report.md
+.claude/settings.local.json
+.factorypath
+
+# ======================================
+# 1. VS Code 编辑器相关（自动忽略）
+# ======================================
+.vscode/
+!.vscode/extensions.json
+!.vscode/settings.json
+.history/
+*.code-workspace
+
+# ======================================
+# 2. Vue / 前端项目构建产物
+# ======================================
+/dist
+/dist-ssr
+/coverage
+*.local
+/node_modules
