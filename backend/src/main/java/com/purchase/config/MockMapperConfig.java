@@ -7,10 +7,9 @@ import com.purchase.mapper.ProductMapper;
 import com.purchase.mapper.PurchaseOrderMapper;
 import com.purchase.mapper.UserMapper;
 import com.purchase.service.UserService;
-import com.purchase.service.impl.UserServiceImpl;
-import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 
 import java.lang.reflect.Proxy;
@@ -75,7 +74,7 @@ public class MockMapperConfig {
                     User user = new User();
                     user.setId(1L);
                     user.setUsername("admin");
-                    user.setPassword("$2a$10$N.zmdr9k7uOCQb376NoUnuTJ8iAt6Z5EHsM8lE9lBOtl7gQTzfDOo2");
+                    user.setPassword("$2a$10$M81rJ.LMwhGzM3VXFEM9d.14O3EgTCqw9j50TRba/UbqT0qxGyuRu");
                     user.setRealName("管理员");
                     user.setStatus(1);
                     return user;

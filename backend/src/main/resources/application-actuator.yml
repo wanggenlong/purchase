@@ -1,0 +1,22 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  info:
+    env:
+      enabled: true
+
+info:
+  app:
+    name: ${spring.application.name}
+    version: @project.version@
+    description: 采购管理系统后端
+  build:
+    artifact: @project.artifactId@
+  java:
+    version: ${java.version}
+  env:
+    profile: ${spring.profiles.active}
+    port: ${server.port}
+    timezone: ${spring.jackson.time-zone}
