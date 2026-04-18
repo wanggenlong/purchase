@@ -30,8 +30,7 @@ public class LoginController {
 
     @PostMapping("/login")
     @Operation(summary = "用户登录", description = "根据用户名密码登录系统，返回JWT Token")
-    public Result<LoginResponseVO> login(
-            @RequestBody LoginRequestDTO request) {
+    public Result<LoginResponseVO> login(@RequestBody LoginRequestDTO request) {
         String username = request.getUsername();
         String password = request.getPassword();
 
@@ -70,8 +69,7 @@ public class LoginController {
 
     @PostMapping("/info")
     @Operation(summary = "获取用户信息", description = "根据Token获取当前登录用户信息")
-    public Result<User> getUserInfo(
-            @RequestBody TokenRequestDTO body) {
+    public Result<User> getUserInfo(@RequestBody TokenRequestDTO body) {
         try {
             String token = body.getToken();
             String username = com.purchase.config.JwtUtil.getUsernameFromToken(token);
