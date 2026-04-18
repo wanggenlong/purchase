@@ -1,3 +1,17 @@
+## [0.0.2] - 2026-04-18
+
+### 新增
+- 商品分页查询，支持按 productName/skuCode 模糊过滤和 categoryId 分类筛选
+- 商品新增、修改、删除（逻辑删除）功能
+- 商品 Excel 导出功能（EasyExcel）
+- 商品分类 4 级类目树接口（Category 模块）
+- 前端商品列表完整 CRUD 页面，含搜索、分页、弹窗表单、级联分类选择器
+
+### 优化
+- Product 实体补齐 categoryId、description 字段
+- ProductVO 增加 categoryName（完整分类路径）、description 字段
+- 移除 ProductServiceImpl 中的 mock 分支逻辑，仅保留 dev 模式
+
 ## [0.2.0] - 2026-04-18
 
 ### 新增（新功能/新模块）
