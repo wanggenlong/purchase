@@ -61,6 +61,19 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
         }
     }
 
+    @Override
+    public Category getCategoryById(Long id) {
+        return getById(id);
+    }
+
+    @Override
+    public Category getActiveCategoryById(Long id) {
+        return lambdaQuery()
+                .eq(Category::getId, id)
+                .eq(Category::getIsDelete, 0)
+                .one();
+    }
+
     private CategoryTreeVO toTreeVO(Category category) {
         CategoryTreeVO vo = new CategoryTreeVO();
         vo.setId(category.getId());
