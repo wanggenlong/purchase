@@ -7,9 +7,50 @@ export function getHealthStatus() {
   });
 }
 
-export function getProducts() {
+export function getProductPage(data) {
   return request({
-    url: '/products/list',
+    url: '/products/page',
+    method: 'post',
+    data
+  });
+}
+
+export function addProduct(data) {
+  return request({
+    url: '/products/add',
+    method: 'post',
+    data
+  });
+}
+
+export function updateProduct(data) {
+  return request({
+    url: '/products/update',
+    method: 'post',
+    data
+  });
+}
+
+export function deleteProduct(data) {
+  return request({
+    url: '/products/delete',
+    method: 'post',
+    data
+  });
+}
+
+export function exportProduct(data) {
+  return request({
+    url: '/products/export',
+    method: 'post',
+    data,
+    responseType: 'blob'
+  });
+}
+
+export function getCategoryTree() {
+  return request({
+    url: '/categories/tree',
     method: 'post'
   });
 }
