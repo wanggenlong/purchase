@@ -2,6 +2,7 @@ purchase:
   security:
     permit-all:
       - /products/**
+      - /categories/**
       - /actuator/**
       - /auth/**
       - /v3/api-docs/**
