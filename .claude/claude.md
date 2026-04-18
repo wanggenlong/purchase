@@ -120,7 +120,7 @@ frontend/
 
 1. 接口风格：@PostMapping + @RequestBody + @ResponseBody
 2. 全局参数校验 + 全局异常捕获
-3. 添加基于OpenAPI 3的注解
+3. 添加基于OpenAPI 3的注解@Tag、@Operation
 
 ## 7. 文档规范
 
