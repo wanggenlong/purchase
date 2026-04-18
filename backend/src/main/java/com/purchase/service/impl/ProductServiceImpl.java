@@ -27,8 +27,8 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
             return listProductsFromMysql();
         }
         return Arrays.asList(
-                new ProductVO(1L, "演示商品A", "SKU-A001", 120, new BigDecimal("39.90")),
-                new ProductVO(2L, "演示商品B", "SKU-B002", 85, new BigDecimal("59.90"))
+                buildDemoProductVO(1L, "演示商品A", "SKU-A001", 120, new BigDecimal("39.90")),
+                buildDemoProductVO(2L, "演示商品B", "SKU-B002", 85, new BigDecimal("59.90"))
         );
     }
 
@@ -38,9 +38,29 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
                 .orderByAsc(Product::getId)
                 .list()
                 .stream()
-                .map(product ->
-                        new ProductVO(product.getId(), product.getProductName(), product.getSkuCode(), product.getStock(), product.getPurchasePrice())
-                )
+                .map(this::convertToVO)
                 .collect(Collectors.toList());
+    }
+
+    private ProductVO convertToVO(Product product) {
+        ProductVO vo = new ProductVO();
+        vo.setId(product.getId());
+        vo.setProductName(product.getProductName());
+        vo.setSkuCode(product.getSkuCode());
+        vo.setCategoryId(product.getCategoryId());
+        vo.setStock(product.getStock());
+        vo.setPurchasePrice(product.getPurchasePrice());
+        vo.setDescription(product.getDescription());
+        return vo;
+    }
+
+    private ProductVO buildDemoProductVO(long id, String productName, String skuCode, int stock, BigDecimal price) {
+        ProductVO vo = new ProductVO();
+        vo.setId(id);
+        vo.setProductName(productName);
+        vo.setSkuCode(skuCode);
+        vo.setStock(stock);
+        vo.setPurchasePrice(price);
+        return vo;
     }
 }

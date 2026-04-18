@@ -11,9 +11,16 @@ import java.math.BigDecimal;
 @TableName("t_product")
 public class Product extends BaseEntity {
 
+    /** 商品名称 */
     private String productName;
+    /** SKU编码 */
     private String skuCode;
+    /** 分类ID */
+    private Long categoryId;
+    /** 库存数量 */
     private Integer stock;
+    /** 采购价 */
     private BigDecimal purchasePrice;
-
+    /** 商品描述 */
+    private String description;
 }
