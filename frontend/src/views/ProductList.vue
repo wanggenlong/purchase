@@ -19,7 +19,7 @@
       <el-cascader
         v-model="queryForm.categoryNos"
         :options="categoryTree"
-        :props="cascaderProps"
+        :props="queryCascaderProps"
         placeholder="商品分类"
         clearable
         class="search-cascader"
@@ -138,7 +138,14 @@ export default {
         label: 'categoryName',
         children: 'children',
         checkStrictly: false,
-        emitPath: false
+        emitPath: true
+      },
+      queryCascaderProps: {
+        value: 'categoryNo',
+        label: 'categoryName',
+        children: 'children',
+        checkStrictly: true,
+        emitPath: true
       },
       queryForm: {
         pageNum: 1,
@@ -188,7 +195,7 @@ export default {
           pageSize: this.queryForm.pageSize,
           productName: this.queryForm.productName || undefined,
           skuCode: this.queryForm.skuCode || undefined,
-          categoryNo: this.queryForm.categoryNos.length > 0 ? this.queryForm.categoryNos[this.queryForm.categoryNos.length - 1] : undefined
+          categoryNo: (this.queryForm.categoryNos && this.queryForm.categoryNos.length > 0) ? this.queryForm.categoryNos[this.queryForm.categoryNos.length - 1] : undefined
         };
         const result = await getProductPage(params);
         this.productList = result.data.records;
@@ -313,7 +320,7 @@ export default {
         const params = {
           productName: this.queryForm.productName || undefined,
           skuCode: this.queryForm.skuCode || undefined,
-          categoryNo: this.queryForm.categoryNos.length > 0 ? this.queryForm.categoryNos[this.queryForm.categoryNos.length - 1] : undefined
+          categoryNo: (this.queryForm.categoryNos && this.queryForm.categoryNos.length > 0) ? this.queryForm.categoryNos[this.queryForm.categoryNos.length - 1] : undefined
         };
         const result = await exportProduct(params);
         const blob = new Blob([result], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
@@ -389,5 +396,9 @@ export default {
 .action-link:hover,
 .delete-link:hover {
   opacity: 0.8;
+}
+
+.search-cascader >>> .el-cascader-node .el-radio {
+  display: none;
 }
 </style>
