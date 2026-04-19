@@ -1,6 +1,7 @@
 package com.purchase.service.impl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.purchase.common.exception.BusinessException;
@@ -14,10 +15,10 @@ import com.purchase.service.CategoryService;
 import com.purchase.service.ProductService;
 import com.purchase.vo.ProductExportVO;
 import com.purchase.vo.ProductVO;
+import jakarta.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
-import jakarta.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,14 +32,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     @Override
     public IPage<ProductVO> pageProducts(ProductPageQueryDTO queryDTO) {
         Page<Product> page = new Page<>(queryDTO.getPageNum(), queryDTO.getPageSize());
-        var query = lambdaQuery()
-                .eq(Product::getIsDelete, 0)
-                .like(StringUtils.isNotBlank(queryDTO.getProductName()), Product::getProductName, queryDTO.getProductName())
-                .like(StringUtils.isNotBlank(queryDTO.getSkuCode()), Product::getSkuCode, queryDTO.getSkuCode());
-        if (StringUtils.isNotBlank(queryDTO.getCategoryNo())) {
-            query.in(Product::getCategoryNo, categoryService.findDescendantNos(queryDTO.getCategoryNo()));
-        }
-        IPage<Product> productPage = query.orderByDesc(Product::getUpdateTime).page(page);
+        IPage<Product> productPage = buildProductQuery(queryDTO).orderByDesc(Product::getUpdateTime).page(page);
         return productPage.convert(this::toProductVO);
     }
 
@@ -88,6 +82,14 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
 
     @Override
     public List<ProductExportVO> listExportData(ProductPageQueryDTO queryDTO) {
+        List<Product> products = buildProductQuery(queryDTO).orderByDesc(Product::getUpdateTime).list();
+        return products.stream()
+                .map(this::toExportVO)
+                .collect(Collectors.toList());
+    }
+
+    /** 构建商品公共查询条件 */
+    private LambdaQueryChainWrapper<Product> buildProductQuery(ProductPageQueryDTO queryDTO) {
         var query = lambdaQuery()
                 .eq(Product::getIsDelete, 0)
                 .like(StringUtils.isNotBlank(queryDTO.getProductName()), Product::getProductName, queryDTO.getProductName())
@@ -95,11 +97,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
         if (StringUtils.isNotBlank(queryDTO.getCategoryNo())) {
             query.in(Product::getCategoryNo, categoryService.findDescendantNos(queryDTO.getCategoryNo()));
         }
-        List<Product> products = query.orderByDesc(Product::getUpdateTime).list();
-
-        return products.stream()
-                .map(this::toExportVO)
-                .collect(Collectors.toList());
+        return query;
     }
 
     /** 校验SKU编码唯一性 */
