@@ -1,13 +1,13 @@
+purchase:
+  data:
+    mode: dev
+
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/purchase_db?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
     username: root
     password: root
-
-purchase:
-  data:
-    mode: dev
 
 mybatis-plus:
   mapper-locations: classpath*:mapper/*.xml
