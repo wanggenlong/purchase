@@ -1,0 +1,78 @@
+<h2>商品新增/编辑弹窗</h2>
+<p class="subtitle">Dialog 弹窗表单，谷歌风格</p>
+
+<div class="mockup">
+  <div class="mockup-header">新增商品</div>
+  <div class="mockup-body" style="padding:0;">
+    <div style="background:#fff; font-family:Roboto,Helvetica,Arial,sans-serif; font-size:13px; color:#202124;">
+
+      <!-- 弹窗头部 -->
+      <div style="padding:20px 24px 12px; border-bottom:1px solid #e0e0e0; display:flex; justify-content:space-between; align-items:center;">
+        <span style="font-size:18px; font-weight:500;">新增商品</span>
+        <span style="color:#5f6368; cursor:pointer; font-size:20px;">✕</span>
+      </div>
+
+      <!-- 表单区域 -->
+      <div style="padding:20px 24px;">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+
+          <div>
+            <label style="display:block; color:#5f6368; font-size:12px; margin-bottom:6px;">商品名称 <span style="color:#d93025;">*</span></label>
+            <input style="width:100%; border:1px solid #dadce0; border-radius:8px; padding:10px 12px; font-size:13px; outline:none; box-sizing:border-box;" placeholder="请输入商品名称">
+          </div>
+
+          <div>
+            <label style="display:block; color:#5f6368; font-size:12px; margin-bottom:6px;">SKU编码 <span style="color:#d93025;">*</span></label>
+            <input style="width:100%; border:1px solid #dadce0; border-radius:8px; padding:10px 12px; font-size:13px; outline:none; box-sizing:border-box;" placeholder="请输入SKU编码">
+          </div>
+
+          <div>
+            <label style="display:block; color:#5f6368; font-size:12px; margin-bottom:6px;">商品分类 <span style="color:#d93025;">*</span></label>
+            <div style="width:100%; border:1px solid #dadce0; border-radius:8px; padding:10px 12px; font-size:13px; color:#5f6368; display:flex; justify-content:space-between; align-items:center;">
+              <span>请选择分类</span>
+              <span>▾</span>
+            </div>
+          </div>
+
+          <div>
+            <label style="display:block; color:#5f6368; font-size:12px; margin-bottom:6px;">采购价 <span style="color:#d93025;">*</span></label>
+            <input style="width:100%; border:1px solid #dadce0; border-radius:8px; padding:10px 12px; font-size:13px; outline:none; box-sizing:border-box;" placeholder="请输入采购价">
+          </div>
+
+          <div>
+            <label style="display:block; color:#5f6368; font-size:12px; margin-bottom:6px;">库存数量</label>
+            <input style="width:100%; border:1px solid #dadce0; border-radius:8px; padding:10px 12px; font-size:13px; outline:none; box-sizing:border-box;" placeholder="请输入库存数量">
+          </div>
+
+          <div>
+            <label style="display:block; color:#5f6368; font-size:12px; margin-bottom:6px;">单位</label>
+            <input style="width:100%; border:1px solid #dadce0; border-radius:8px; padding:10px 12px; font-size:13px; outline:none; box-sizing:border-box;" placeholder="如：个、台、箱">
+          </div>
+
+        </div>
+
+        <div style="margin-top:16px;">
+          <label style="display:block; color:#5f6368; font-size:12px; margin-bottom:6px;">商品描述</label>
+          <textarea style="width:100%; border:1px solid #dadce0; border-radius:8px; padding:10px 12px; font-size:13px; outline:none; resize:vertical; min-height:80px; box-sizing:border-box;" placeholder="请输入商品描述"></textarea>
+        </div>
+      </div>
+
+      <!-- 底部按钮 -->
+      <div style="padding:12px 24px 20px; display:flex; justify-content:flex-end; gap:12px;">
+        <button style="background:#fff; color:#1a73e8; border:1px solid #dadce0; border-radius:8px; padding:8px 24px; font-size:13px; cursor:pointer;">取消</button>
+        <button style="background:#1a73e8; color:#fff; border:none; border-radius:8px; padding:8px 24px; font-size:13px; cursor:pointer;">确定</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top:24px;">
+  <h3>表单字段</h3>
+  <ul style="color:#5f6368; line-height:1.8;">
+    <li><strong>必填</strong>：商品名称、SKU编码、商品分类、采购价</li>
+    <li><strong>选填</strong>：库存数量、单位、商品描述</li>
+    <li><strong>布局</strong>：两列网格，描述字段独占一行</li>
+    <li><strong>新增/编辑</strong>：共用同一个弹窗，编辑时自动回填数据</li>
+  </ul>
+</div>

@@ -1,0 +1,112 @@
+<h2>商品列表页 UI 设计</h2>
+<p class="subtitle">模仿谷歌 Material Design 风格，与现有 Element UI 页面保持一致</p>
+
+<div class="split">
+  <div class="mockup">
+    <div class="mockup-header">商品列表页 - 完整布局</div>
+    <div class="mockup-body" style="padding:0;">
+      <div style="background:#fff; font-family:Roboto,Helvetica,Arial,sans-serif; font-size:13px; color:#202124;">
+
+        <!-- 顶部搜索栏 -->
+        <div style="padding:16px 24px; border-bottom:1px solid #e0e0e0; display:flex; align-items:center; gap:12px;">
+          <div style="flex:1; display:flex; align-items:center; background:#f1f3f4; border-radius:8px; padding:0 16px; height:40px;">
+            <span style="color:#5f6368; margin-right:12px;">🔍</span>
+            <span style="color:#5f6368;">商品名称</span>
+          </div>
+          <div style="flex:1; display:flex; align-items:center; background:#f1f3f4; border-radius:8px; padding:0 16px; height:40px;">
+            <span style="color:#5f6368; margin-right:12px;">🔍</span>
+            <span style="color:#5f6368;">SKU编码</span>
+          </div>
+          <div style="display:flex; align-items:center; background:#f1f3f4; border-radius:8px; padding:0 16px; height:40px; width:160px;">
+            <span style="color:#5f6368;">分类</span>
+          </div>
+          <button style="background:#1a73e8; color:#fff; border:none; border-radius:8px; padding:8px 24px; font-size:13px; cursor:pointer;">查询</button>
+          <button style="background:#fff; color:#1a73e8; border:1px solid #dadce0; border-radius:8px; padding:8px 16px; font-size:13px; cursor:pointer;">重置</button>
+        </div>
+
+        <!-- 操作栏 -->
+        <div style="padding:12px 24px; display:flex; justify-content:space-between; align-items:center;">
+          <button style="background:#1a73e8; color:#fff; border:none; border-radius:8px; padding:8px 20px; font-size:13px; cursor:pointer;">+ 新增商品</button>
+          <button style="background:#fff; color:#1a73e8; border:1px solid #dadce0; border-radius:8px; padding:8px 20px; font-size:13px; cursor:pointer;">📥 导出Excel</button>
+        </div>
+
+        <!-- 数据表格 -->
+        <table style="width:100%; border-collapse:collapse;">
+          <thead>
+            <tr style="background:#f8f9fa; border-bottom:1px solid #e0e0e0;">
+              <th style="padding:12px 24px; text-align:left; font-weight:500; color:#5f6368; font-size:12px;">ID</th>
+              <th style="padding:12px 16px; text-align:left; font-weight:500; color:#5f6368; font-size:12px;">商品名称</th>
+              <th style="padding:12px 16px; text-align:left; font-weight:500; color:#5f6368; font-size:12px;">SKU编码</th>
+              <th style="padding:12px 16px; text-align:left; font-weight:500; color:#5f6368; font-size:12px;">分类</th>
+              <th style="padding:12px 16px; text-align:right; font-weight:500; color:#5f6368; font-size:12px;">库存</th>
+              <th style="padding:12px 16px; text-align:right; font-weight:500; color:#5f6368; font-size:12px;">采购价</th>
+              <th style="padding:12px 16px; text-align:center; font-weight:500; color:#5f6368; font-size:12px;">操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid #e0e0e0;">
+              <td style="padding:12px 24px;">1</td>
+              <td style="padding:12px 16px;">华为 Mate 60 Pro</td>
+              <td style="padding:12px 16px;">SKU-HW-001</td>
+              <td style="padding:12px 16px;"><span style="background:#e8f0fe; color:#1a73e8; padding:2px 10px; border-radius:12px; font-size:12px;">手机</span></td>
+              <td style="padding:12px 16px; text-align:right;">150</td>
+              <td style="padding:12px 16px; text-align:right;">¥5,499.00</td>
+              <td style="padding:12px 16px; text-align:center;">
+                <a style="color:#1a73e8; text-decoration:none; margin-right:12px; font-size:13px;">编辑</a>
+                <a style="color:#d93025; text-decoration:none; font-size:13px;">删除</a>
+              </td>
+            </tr>
+            <tr style="border-bottom:1px solid #e0e0e0;">
+              <td style="padding:12px 24px;">2</td>
+              <td style="padding:12px 16px;">MacBook Pro 14"</td>
+              <td style="padding:12px 16px;">SKU-AP-002</td>
+              <td style="padding:12px 16px;"><span style="background:#e8f0fe; color:#1a73e8; padding:2px 10px; border-radius:12px; font-size:12px;">笔记本</span></td>
+              <td style="padding:12px 16px; text-align:right;">80</td>
+              <td style="padding:12px 16px; text-align:right;">¥12,999.00</td>
+              <td style="padding:12px 16px; text-align:center;">
+                <a style="color:#1a73e8; text-decoration:none; margin-right:12px; font-size:13px;">编辑</a>
+                <a style="color:#d93025; text-decoration:none; font-size:13px;">删除</a>
+              </td>
+            </tr>
+            <tr style="border-bottom:1px solid #e0e0e0;">
+              <td style="padding:12px 24px;">3</td>
+              <td style="padding:12px 16px;">戴尔 U2723QE 显示器</td>
+              <td style="padding:12px 16px;">SKU-DL-003</td>
+              <td style="padding:12px 16px;"><span style="background:#e8f0fe; color:#1a73e8; padding:2px 10px; border-radius:12px; font-size:12px;">显示器</span></td>
+              <td style="padding:12px 16px; text-align:right;">45</td>
+              <td style="padding:12px 16px; text-align:right;">¥3,899.00</td>
+              <td style="padding:12px 16px; text-align:center;">
+                <a style="color:#1a73e8; text-decoration:none; margin-right:12px; font-size:13px;">编辑</a>
+                <a style="color:#d93025; text-decoration:none; font-size:13px;">删除</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- 分页栏 -->
+        <div style="padding:12px 24px; display:flex; justify-content:space-between; align-items:center; border-top:1px solid #e0e0e0;">
+          <span style="color:#5f6368; font-size:13px;">共 86 条</span>
+          <div style="display:flex; align-items:center; gap:4px;">
+            <button style="background:#fff; border:1px solid #dadce0; border-radius:4px; padding:4px 10px; font-size:13px; cursor:pointer; color:#5f6368;">&lt;</button>
+            <button style="background:#1a73e8; color:#fff; border:none; border-radius:4px; padding:4px 10px; font-size:13px;">1</button>
+            <button style="background:#fff; border:1px solid #dadce0; border-radius:4px; padding:4px 10px; font-size:13px; cursor:pointer; color:#5f6368;">2</button>
+            <button style="background:#fff; border:1px solid #dadce0; border-radius:4px; padding:4px 10px; font-size:13px; cursor:pointer; color:#5f6368;">3</button>
+            <button style="background:#fff; border:1px solid #dadce0; border-radius:4px; padding:4px 10px; font-size:13px; cursor:pointer; color:#5f6368;">&gt;</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top:24px;">
+  <h3>设计说明</h3>
+  <ul style="color:#5f6368; line-height:1.8;">
+    <li><strong>搜索栏</strong>：顶部三个筛选条件（商品名称、SKU编码、分类下拉），加查询/重置按钮</li>
+    <li><strong>操作栏</strong>：左侧新增按钮，右侧导出按钮</li>
+    <li><strong>表格</strong>：分类字段用蓝色标签展示名称，操作列用文字链接（编辑/删除）</li>
+    <li><strong>分页</strong>：底部左侧显示总数，右侧分页控件</li>
+    <li><strong>配色</strong>：主色 #1a73e8（谷歌蓝），背景 #f8f9fa，边框 #dadce0</li>
+  </ul>
+</div>

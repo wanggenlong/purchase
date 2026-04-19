@@ -1,0 +1,166 @@
+<h2>商品新增/编辑弹窗（调整后）</h2>
+<p class="subtitle">移除库存和单位字段，分类改为4级级联选择器</p>
+
+<div class="mockup">
+  <div class="mockup-header">新增商品 - 调整后</div>
+  <div class="mockup-body" style="padding:0;">
+    <div style="background:#fff; font-family:Roboto,Helvetica,Arial,sans-serif; font-size:13px; color:#202124;">
+
+      <!-- 弹窗头部 -->
+      <div style="padding:20px 24px 12px; border-bottom:1px solid #e0e0e0; display:flex; justify-content:space-between; align-items:center;">
+        <span style="font-size:18px; font-weight:500;">新增商品</span>
+        <span style="color:#5f6368; cursor:pointer; font-size:20px;">✕</span>
+      </div>
+
+      <!-- 表单区域 -->
+      <div style="padding:20px 24px;">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+
+          <div>
+            <label style="display:block; color:#5f6368; font-size:12px; margin-bottom:6px;">商品名称 <span style="color:#d93025;">*</span></label>
+            <input style="width:100%; border:1px solid #dadce0; border-radius:8px; padding:10px 12px; font-size:13px; outline:none; box-sizing:border-box;" placeholder="请输入商品名称">
+          </div>
+
+          <div>
+            <label style="display:block; color:#5f6368; font-size:12px; margin-bottom:6px;">SKU编码 <span style="color:#d93025;">*</span></label>
+            <input style="width:100%; border:1px solid #dadce0; border-radius:8px; padding:10px 12px; font-size:13px; outline:none; box-sizing:border-box;" placeholder="请输入SKU编码">
+          </div>
+
+          <!-- 4级级联分类选择器 -->
+          <div style="grid-column:1 / -1;">
+            <label style="display:block; color:#5f6368; font-size:12px; margin-bottom:6px;">商品分类 <span style="color:#d93025;">*</span></label>
+            <div style="display:flex; gap:8px; align-items:center;">
+              <div style="flex:1; border:1px solid #dadce0; border-radius:8px; padding:10px 12px; font-size:13px; color:#1a73e8; background:#f1f3f4;">
+                电子产品
+              </div>
+              <span style="color:#5f6368;">›</span>
+              <div style="flex:1; border:1px solid #dadce0; border-radius:8px; padding:10px 12px; font-size:13px; color:#1a73e8; background:#f1f3f4;">
+                通讯设备
+              </div>
+              <span style="color:#5f6368;">›</span>
+              <div style="flex:1; border:1px solid #dadce0; border-radius:8px; padding:10px 12px; font-size:13px; color:#1a73e8; background:#f1f3f4;">
+                智能手机
+              </div>
+              <span style="color:#5f6368;">›</span>
+              <div style="flex:1; border:1px solid #dadce0; border-radius:8px; padding:10px 12px; font-size:13px; color:#5f6368;">
+                5G手机
+              </div>
+            </div>
+            <div style="color:#5f6368; font-size:11px; margin-top:4px;">一级 › 二级 › 三级 › 四级</div>
+          </div>
+
+          <div>
+            <label style="display:block; color:#5f6368; font-size:12px; margin-bottom:6px;">采购价 <span style="color:#d93025;">*</span></label>
+            <input style="width:100%; border:1px solid #dadce0; border-radius:8px; padding:10px 12px; font-size:13px; outline:none; box-sizing:border-box;" placeholder="请输入采购价">
+          </div>
+
+        </div>
+
+        <div style="margin-top:16px;">
+          <label style="display:block; color:#5f6368; font-size:12px; margin-bottom:6px;">商品描述</label>
+          <textarea style="width:100%; border:1px solid #dadce0; border-radius:8px; padding:10px 12px; font-size:13px; outline:none; resize:vertical; min-height:80px; box-sizing:border-box;" placeholder="请输入商品描述"></textarea>
+        </div>
+      </div>
+
+      <!-- 底部按钮 -->
+      <div style="padding:12px 24px 20px; display:flex; justify-content:flex-end; gap:12px;">
+        <button style="background:#fff; color:#1a73e8; border:1px solid #dadce0; border-radius:8px; padding:8px 24px; font-size:13px; cursor:pointer;">取消</button>
+        <button style="background:#1a73e8; color:#fff; border:none; border-radius:8px; padding:8px 24px; font-size:13px; cursor:pointer;">确定</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top:32px;">
+  <h2>4级类目树结构示例</h2>
+  <p class="subtitle">综合电商全品类标准类目</p>
+</div>
+
+<div class="mockup">
+  <div class="mockup-header">类目树示例（部分）</div>
+  <div class="mockup-body" style="padding:16px 24px; font-family:Roboto,Helvetica,Arial,sans-serif; font-size:13px; color:#202124; line-height:2;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px 32px;">
+
+      <div>
+        <div style="font-weight:500; color:#1a73e8;">▶ 电子产品</div>
+        <div style="padding-left:20px;">
+          <div style="color:#1a73e8;">▸ 通讯设备</div>
+          <div style="padding-left:20px;">
+            <div>└ 智能手机
+              <div style="padding-left:16px; color:#5f6368;">├ 5G手机　└ 4G手机</div>
+            </div>
+            <div>└ 功能机
+              <div style="padding-left:16px; color:#5f6368;">└ 老人机</div>
+            </div>
+          </div>
+          <div style="color:#1a73e8;">▸ 计算机设备</div>
+          <div style="padding-left:20px;">
+            <div>└ 笔记本电脑
+              <div style="padding-left:16px; color:#5f6368;">├ 游戏本　├ 商务本　└ 轻薄本</div>
+            </div>
+            <div>└ 台式机
+              <div style="padding-left:16px; color:#5f6368;">├ 品牌整机　└ 组装机</div>
+            </div>
+          </div>
+          <div style="color:#1a73e8;">▸ 办公设备</div>
+          <div style="padding-left:20px;">
+            <div>└ 打印机
+              <div style="padding-left:16px; color:#5f6368;">├ 激光打印机　└ 喷墨打印机</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div style="font-weight:500; color:#1a73e8;">▶ 办公用品</div>
+        <div style="padding-left:20px;">
+          <div style="color:#1a73e8;">▸ 文具用品</div>
+          <div style="padding-left:20px;">
+            <div>└ 书写工具
+              <div style="padding-left:16px; color:#5f6368;">├ 中性笔　└ 钢笔</div>
+            </div>
+          </div>
+          <div style="color:#1a73e8;">▸ 纸制品</div>
+          <div style="padding-left:20px;">
+            <div>└ 复印纸
+              <div style="padding-left:16px; color:#5f6368;">├ A4复印纸　└ A3复印纸</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="font-weight:500; color:#1a73e8; margin-top:8px;">▶ 家居生活</div>
+        <div style="padding-left:20px;">
+          <div style="color:#1a73e8;">▸ 清洁用品</div>
+          <div style="padding-left:20px;">
+            <div>└ 清洁剂
+              <div style="padding-left:16px; color:#5f6368;">├ 多功能清洁剂　└ 玻璃清洁剂</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="font-weight:500; color:#1a73e8; margin-top:8px;">▶ 食品饮料</div>
+        <div style="padding-left:20px;">
+          <div style="color:#1a73e8;">▸ 休闲零食</div>
+          <div style="padding-left:20px;">
+            <div>└ 坚果炒货
+              <div style="padding-left:16px; color:#5f6368;">├ 混合坚果　└ 夏威夷果</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top:24px;">
+  <h3>调整说明</h3>
+  <ul style="color:#5f6368; line-height:1.8;">
+    <li><strong>移除</strong>：库存数量（只读，由采购单决定）、单位字段</li>
+    <li><strong>分类选择器</strong>：4级级联，依次选择：一级 › 二级 › 三级 › 四级</li>
+    <li><strong>存储</strong>：商品表的 category_id 存储最末级（第四级）类目ID，通过递归查询可获取完整类目路径</li>
+    <li><strong>类目数据</strong>：t_category 表使用 parent_id 实现树形结构，初始化时预置标准4级类目数据</li>
+    <li><strong>表单必填</strong>：商品名称、SKU编码、商品分类（4级全选）、采购价</li>
+  </ul>
+</div>
