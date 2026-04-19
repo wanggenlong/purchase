@@ -13,8 +13,8 @@ public class ProductVO {
     private String productName;
     /** SKU编码 */
     private String skuCode;
-    /** 分类ID */
-    private Long categoryId;
+    /** 分类编码 */
+    private String categoryNo;
     /** 分类名称（完整路径，如：电子产品/通讯设备/智能手机/5G手机） */
     private String categoryName;
     /** 库存数量 */

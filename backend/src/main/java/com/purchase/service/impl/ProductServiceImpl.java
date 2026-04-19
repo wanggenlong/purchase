@@ -35,8 +35,8 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
                 .eq(Product::getIsDelete, 0)
                 .like(StringUtils.isNotBlank(queryDTO.getProductName()), Product::getProductName, queryDTO.getProductName())
                 .like(StringUtils.isNotBlank(queryDTO.getSkuCode()), Product::getSkuCode, queryDTO.getSkuCode());
-        if (queryDTO.getCategoryId() != null) {
-            query.in(Product::getCategoryId, categoryService.findDescendantIds(queryDTO.getCategoryId()));
+        if (StringUtils.isNotBlank(queryDTO.getCategoryNo())) {
+            query.in(Product::getCategoryNo, categoryService.findDescendantNos(queryDTO.getCategoryNo()));
         }
         IPage<Product> productPage = query.orderByDesc(Product::getUpdateTime).page(page);
         return productPage.convert(this::toProductVO);
@@ -45,12 +45,12 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     @Override
     public void addProduct(ProductCreateDTO createDTO) {
         validateSkuCodeUnique(createDTO.getSkuCode(), null);
-        validateCategoryLeaf(createDTO.getCategoryId());
+        validateCategoryLeaf(createDTO.getCategoryNo());
 
         Product product = new Product();
         product.setProductName(createDTO.getProductName());
         product.setSkuCode(createDTO.getSkuCode());
-        product.setCategoryId(createDTO.getCategoryId());
+        product.setCategoryNo(createDTO.getCategoryNo());
         product.setStock(0);
         product.setPurchasePrice(createDTO.getPurchasePrice());
         product.setDescription(createDTO.getDescription());
@@ -67,11 +67,11 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
             throw new BusinessException("商品不存在");
         }
         validateSkuCodeUnique(updateDTO.getSkuCode(), updateDTO.getId());
-        validateCategoryLeaf(updateDTO.getCategoryId());
+        validateCategoryLeaf(updateDTO.getCategoryNo());
 
         existing.setProductName(updateDTO.getProductName());
         existing.setSkuCode(updateDTO.getSkuCode());
-        existing.setCategoryId(updateDTO.getCategoryId());
+        existing.setCategoryNo(updateDTO.getCategoryNo());
         existing.setPurchasePrice(updateDTO.getPurchasePrice());
         existing.setDescription(updateDTO.getDescription());
         updateById(existing);
@@ -92,8 +92,8 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
                 .eq(Product::getIsDelete, 0)
                 .like(StringUtils.isNotBlank(queryDTO.getProductName()), Product::getProductName, queryDTO.getProductName())
                 .like(StringUtils.isNotBlank(queryDTO.getSkuCode()), Product::getSkuCode, queryDTO.getSkuCode());
-        if (queryDTO.getCategoryId() != null) {
-            query.in(Product::getCategoryId, categoryService.findDescendantIds(queryDTO.getCategoryId()));
+        if (StringUtils.isNotBlank(queryDTO.getCategoryNo())) {
+            query.in(Product::getCategoryNo, categoryService.findDescendantNos(queryDTO.getCategoryNo()));
         }
         List<Product> products = query.orderByDesc(Product::getUpdateTime).list();
 
@@ -115,8 +115,8 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     }
 
     /** 校验分类必须为末级（第4级） */
-    private void validateCategoryLeaf(Long categoryId) {
-        Category category = categoryService.getActiveCategoryById(categoryId);
+    private void validateCategoryLeaf(String categoryNo) {
+        Category category = categoryService.getActiveCategoryByNo(categoryNo);
         if (category == null) {
             throw new BusinessException("分类不存在");
         }
@@ -126,19 +126,19 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     }
 
     /** 构建分类完整路径名称 */
-    private String buildCategoryPath(Long categoryId) {
-        if (categoryId == null) {
+    private String buildCategoryPath(String categoryNo) {
+        if (StringUtils.isBlank(categoryNo)) {
             return "";
         }
         List<String> pathNames = new ArrayList<>();
-        Long currentId = categoryId;
-        for (int i = 0; i < 4 && currentId != null && currentId > 0; i++) {
-            Category category = categoryService.getCategoryById(currentId);
+        String currentNo = categoryNo;
+        for (int i = 0; i < 4 && StringUtils.isNotBlank(currentNo); i++) {
+            Category category = categoryService.getCategoryByNo(currentNo);
             if (category == null) {
                 break;
             }
             pathNames.addFirst(category.getCategoryName());
-            currentId = category.getParentId();
+            currentNo = category.getParentNo();
         }
         return String.join("/", pathNames);
     }
@@ -148,8 +148,8 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
         vo.setId(product.getId());
         vo.setProductName(product.getProductName());
         vo.setSkuCode(product.getSkuCode());
-        vo.setCategoryId(product.getCategoryId());
-        vo.setCategoryName(buildCategoryPath(product.getCategoryId()));
+        vo.setCategoryNo(product.getCategoryNo());
+        vo.setCategoryName(buildCategoryPath(product.getCategoryNo()));
         vo.setStock(product.getStock());
         vo.setPurchasePrice(product.getPurchasePrice());
         vo.setDescription(product.getDescription());
@@ -161,7 +161,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
         vo.setId(product.getId());
         vo.setProductName(product.getProductName());
         vo.setSkuCode(product.getSkuCode());
-        vo.setCategoryName(buildCategoryPath(product.getCategoryId()));
+        vo.setCategoryName(buildCategoryPath(product.getCategoryNo()));
         vo.setStock(product.getStock());
         vo.setPurchasePrice(product.getPurchasePrice());
         vo.setDescription(product.getDescription());

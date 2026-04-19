@@ -17,7 +17,7 @@
         @keyup.enter.native="handleSearch"
       />
       <el-cascader
-        v-model="queryForm.categoryIds"
+        v-model="queryForm.categoryNos"
         :options="categoryTree"
         :props="cascaderProps"
         placeholder="商品分类"
@@ -86,9 +86,9 @@
             </el-form-item>
           </el-col>
         </el-row>
-        <el-form-item label="商品分类" prop="categoryIds">
+        <el-form-item label="商品分类" prop="categoryNos">
           <el-cascader
-            v-model="productForm.categoryIds"
+            v-model="productForm.categoryNos"
             :options="categoryTree"
             :props="cascaderProps"
             placeholder="请选择分类（需选到第四级）"
@@ -134,7 +134,7 @@ export default {
       total: 0,
       categoryTree: [],
       cascaderProps: {
-        value: 'id',
+        value: 'categoryNo',
         label: 'categoryName',
         children: 'children',
         checkStrictly: false,
@@ -145,7 +145,7 @@ export default {
         pageSize: 10,
         productName: '',
         skuCode: '',
-        categoryIds: []
+        categoryNos: []
       },
       dialogVisible: false,
       isEdit: false,
@@ -153,15 +153,15 @@ export default {
         id: null,
         productName: '',
         skuCode: '',
-        categoryIds: [],
-        categoryId: null,
+        categoryNos: [],
+        categoryNo: '',
         purchasePrice: null,
         description: ''
       },
       productRules: {
         productName: [{ required: true, message: '请输入商品名称', trigger: 'blur' }],
         skuCode: [{ required: true, message: '请输入SKU编码', trigger: 'blur' }],
-        categoryIds: [{ required: true, message: '请选择商品分类', trigger: 'change', type: 'array', min: 4 }],
+        categoryNos: [{ required: true, message: '请选择商品分类', trigger: 'change', type: 'array', min: 4 }],
         purchasePrice: [{ required: true, message: '请输入采购价', trigger: 'blur' }]
       }
     };
@@ -188,7 +188,7 @@ export default {
           pageSize: this.queryForm.pageSize,
           productName: this.queryForm.productName || undefined,
           skuCode: this.queryForm.skuCode || undefined,
-          categoryId: this.queryForm.categoryIds.length > 0 ? this.queryForm.categoryIds[this.queryForm.categoryIds.length - 1] : undefined
+          categoryNo: this.queryForm.categoryNos.length > 0 ? this.queryForm.categoryNos[this.queryForm.categoryNos.length - 1] : undefined
         };
         const result = await getProductPage(params);
         this.productList = result.data.records;
@@ -207,7 +207,7 @@ export default {
         pageSize: 10,
         productName: '',
         skuCode: '',
-        categoryIds: []
+        categoryNos: []
       };
       this.loadProducts();
     },
@@ -221,8 +221,8 @@ export default {
         id: null,
         productName: '',
         skuCode: '',
-        categoryIds: [],
-        categoryId: null,
+        categoryNos: [],
+        categoryNo: '',
         purchasePrice: null,
         description: ''
       };
@@ -237,8 +237,8 @@ export default {
         id: row.id,
         productName: row.productName,
         skuCode: row.skuCode,
-        categoryIds: this.buildCategoryPath(row.categoryId),
-        categoryId: row.categoryId,
+        categoryNos: this.buildCategoryPath(row.categoryNo),
+        categoryNo: row.categoryNo,
         purchasePrice: row.purchasePrice,
         description: row.description || ''
       };
@@ -247,22 +247,22 @@ export default {
         this.$refs.productForm && this.$refs.productForm.clearValidate();
       });
     },
-    buildCategoryPath(categoryId) {
+    buildCategoryPath(categoryNo) {
       const path = [];
-      const findPath = (nodes, targetId, currentPath) => {
+      const findPath = (nodes, targetNo, currentPath) => {
         for (const node of nodes) {
-          const newPath = [...currentPath, node.id];
-          if (node.id === targetId) {
+          const newPath = [...currentPath, node.categoryNo];
+          if (node.categoryNo === targetNo) {
             path.push(...newPath);
             return true;
           }
           if (node.children && node.children.length > 0) {
-            if (findPath(node.children, targetId, newPath)) return true;
+            if (findPath(node.children, targetNo, newPath)) return true;
           }
         }
         return false;
       };
-      findPath(this.categoryTree, categoryId, []);
+      findPath(this.categoryTree, categoryNo, []);
       return path;
     },
     handleSubmit() {
@@ -270,11 +270,11 @@ export default {
         if (!valid) return;
         this.submitLoading = true;
 
-        const categoryId = this.productForm.categoryIds[this.productForm.categoryIds.length - 1];
+        const categoryNo = this.productForm.categoryNos[this.productForm.categoryNos.length - 1];
         const data = {
           productName: this.productForm.productName,
           skuCode: this.productForm.skuCode,
-          categoryId: categoryId,
+          categoryNo: categoryNo,
           purchasePrice: this.productForm.purchasePrice,
           description: this.productForm.description
         };
@@ -313,7 +313,7 @@ export default {
         const params = {
           productName: this.queryForm.productName || undefined,
           skuCode: this.queryForm.skuCode || undefined,
-          categoryId: this.queryForm.categoryIds.length > 0 ? this.queryForm.categoryIds[this.queryForm.categoryIds.length - 1] : undefined
+          categoryNo: this.queryForm.categoryNos.length > 0 ? this.queryForm.categoryNos[this.queryForm.categoryNos.length - 1] : undefined
         };
         const result = await exportProduct(params);
         const blob = new Blob([result], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });

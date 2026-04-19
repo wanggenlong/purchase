@@ -15,8 +15,8 @@ public class Product extends BaseEntity {
     private String productName;
     /** SKU编码 */
     private String skuCode;
-    /** 分类ID */
-    private Long categoryId;
+    /** 分类编码 */
+    private String categoryNo;
     /** 库存数量 */
     private Integer stock;
     /** 采购价 */

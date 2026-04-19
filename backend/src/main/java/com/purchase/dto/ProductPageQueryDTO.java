@@ -13,6 +13,6 @@ public class ProductPageQueryDTO {
     private String productName;
     /** SKU编码（模糊） */
     private String skuCode;
-    /** 分类ID（精确，含子分类） */
-    private Long categoryId;
+    /** 分类编码（精确，含子分类） */
+    private String categoryNo;
 }

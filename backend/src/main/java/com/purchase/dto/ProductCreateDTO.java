@@ -16,9 +16,9 @@ public class ProductCreateDTO {
     /** SKU编码 */
     @NotBlank(message = "SKU编码不能为空")
     private String skuCode;
-    /** 分类ID */
-    @NotNull(message = "分类不能为空")
-    private Long categoryId;
+    /** 分类编码 */
+    @NotBlank(message = "分类不能为空")
+    private String categoryNo;
     /** 采购价 */
     @NotNull(message = "采购价不能为空")
     @DecimalMin(value = "0.01", message = "采购价必须大于0")

@@ -26,50 +26,52 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
                 .map(this::toTreeVO)
                 .collect(Collectors.toList());
 
-        Map<Long, List<CategoryTreeVO>> childrenMap = voList.stream()
-                .filter(vo -> vo.getParentId() != null && vo.getParentId() > 0)
-                .collect(Collectors.groupingBy(CategoryTreeVO::getParentId));
+        Map<String, List<CategoryTreeVO>> childrenMap = voList.stream()
+                .filter(vo -> vo.getParentNo() != null && !vo.getParentNo().isEmpty())
+                .collect(Collectors.groupingBy(CategoryTreeVO::getParentNo));
 
         for (CategoryTreeVO vo : voList) {
-            vo.setChildren(childrenMap.get(vo.getId()));
+            vo.setChildren(childrenMap.get(vo.getCategoryNo()));
         }
 
         return voList.stream()
-                .filter(vo -> vo.getParentId() == null || vo.getParentId() == 0)
+                .filter(vo -> vo.getParentNo() == null || vo.getParentNo().isEmpty())
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<Long> findDescendantIds(Long categoryId) {
-        if (categoryId == null) {
+    public List<String> findDescendantNos(String categoryNo) {
+        if (categoryNo == null || categoryNo.isEmpty()) {
             return List.of();
         }
-        List<Long> ids = new ArrayList<>();
-        ids.add(categoryId);
-        collectDescendantIds(categoryId, ids);
-        return ids;
+        List<String> nos = new ArrayList<>();
+        nos.add(categoryNo);
+        collectDescendantNos(categoryNo, nos);
+        return nos;
     }
 
-    private void collectDescendantIds(Long parentId, List<Long> ids) {
+    private void collectDescendantNos(String parentNo, List<String> nos) {
         List<Category> children = lambdaQuery()
                 .eq(Category::getIsDelete, 0)
-                .eq(Category::getParentId, parentId)
+                .eq(Category::getParentNo, parentNo)
                 .list();
         for (Category child : children) {
-            ids.add(child.getId());
-            collectDescendantIds(child.getId(), ids);
+            nos.add(child.getCategoryNo());
+            collectDescendantNos(child.getCategoryNo(), nos);
         }
     }
 
     @Override
-    public Category getCategoryById(Long id) {
-        return getById(id);
+    public Category getCategoryByNo(String categoryNo) {
+        return lambdaQuery()
+                .eq(Category::getCategoryNo, categoryNo)
+                .one();
     }
 
     @Override
-    public Category getActiveCategoryById(Long id) {
+    public Category getActiveCategoryByNo(String categoryNo) {
         return lambdaQuery()
-                .eq(Category::getId, id)
+                .eq(Category::getCategoryNo, categoryNo)
                 .eq(Category::getIsDelete, 0)
                 .one();
     }
@@ -77,8 +79,9 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
     private CategoryTreeVO toTreeVO(Category category) {
         CategoryTreeVO vo = new CategoryTreeVO();
         vo.setId(category.getId());
+        vo.setCategoryNo(category.getCategoryNo());
         vo.setCategoryName(category.getCategoryName());
-        vo.setParentId(category.getParentId());
+        vo.setParentNo(category.getParentNo());
         vo.setLevel(category.getLevel());
         vo.setSortOrder(category.getSortOrder());
         return vo;
