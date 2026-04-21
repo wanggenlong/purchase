@@ -6,7 +6,7 @@
 
 1. backend/  = SpringBoot Maven后端项目
 2. frontend/ = Vue2 + ElementUI前端项目
-3. docs/        = 业务/数据库/版本/superpowers等文档
+3. docs/        = 业务、数据库、版本、superpowers等文档
 
 ## 1. 基础环境
 
@@ -43,7 +43,7 @@ easyexcel
 
 Spring Security BCrypt
 
-SpringDoc（OpenAPI 3）+ Swagger UI
+SpringDoc（OpenAPI 3）
 
 组件：统一返回体、全局异常、CORS跨域、分页、逻辑删除、自动填充时间
 
@@ -74,26 +74,30 @@ ECharts
 ### 【后端 - 严格Maven目录结构】
 
 backend/  # 后端根目录
-├── pom.xml                # Maven核心配置
+├── pom.xml     # Maven核心配置
 └── src/
-    ├── main/              # 生产环境代码
-    │   ├── java/          # Java源码根目录
+    ├── main/                # 生产环境代码
+    │   ├── java/                # Java源码根目录
     │   │   └── com/
-    │   │       └── purchase/  # 项目主包
+    │   │       └── purchase/       # 项目主包
     │   │           ├── common     # 通用工具/统一返回/异常
     │   │           ├── config          # 配置类（CORS/MyBatis/JWT）
+    │   │           ├── controller   # web控制器
+    │   │           ├── dto              # 请求参数对象、各层传输对象
+    │   │           ├── entity          # 数据库实体类
     │   │           ├── enums        # 枚举
+    │   │           ├── filter            # 过滤器
+    │   │           ├── mapper      # 数据访问层
     │   │           ├── service        # 业务逻辑
     │   │           │   └── impl       # 业务实现类
-    │   │           ├── mapper      # 数据访问层
-    │   │           ├── entity          # 数据库实体类
-    │   │           ├── dto              # 请求参数对象、各层传输对象
     │   │           └── vo                # 响应返回对象
-    │   └── resources/              # 配置文件目录
-    │       ├── application.yml    # SpringBoot主配置
-    │       └── mapper/               # MyBatis XML映射文件
-    └── test/              # 单元测试目录
-        └── java/          # 测试代码（包结构同main/java）
+    │   └── resources/     # 配置文件目录
+    │       ├── application.yml               # SpringBoot主配置
+    │       ├── application-dev.yml       # dev模式配置
+    │       ├── application-mock.yml    # mock模式配置
+    │       └── mapper/                           # MyBatis XML映射文件
+    └── test/                 # 单元测试目录
+        └── java/                # 测试代码（包结构同main/java）
 
 ### 【前端 - Vue2标准结构】
 
