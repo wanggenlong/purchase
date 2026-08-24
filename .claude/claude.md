@@ -148,7 +148,7 @@ frontend/
 
 ## 9. 数据库DDL规范
 
-1. 存储引擎InnoDB，字符集utf8mb4，主键id从0开始递增
+1. 存储引擎InnoDB，字符集utf8mb4，主键id自增
 2. 所有表字段配完整中文注释，创建必要索引
 3. 逻辑关联，不建物理外键
 4. 必备公共字段：id、create_time、update_time、is_delete
